@@ -1,5 +1,5 @@
 #  Time Complexity : O(1)
-#  Space Complexity : O(k) k=> number of elements added
+#  Space Complexity : O(n) n=> number of elements added
 #  Did this code successfully run on Leetcode : Yes
 #  Any problem you faced while coding this : It was a bit hard to figure out the code in python
 
@@ -14,8 +14,10 @@ class MyHashSet(object):
         self.secondary_arr = 1000
         self.storage = [None] * self.primary_arr # it is assigned with None initially
     def hash1(self,key):
+        # to get indexes in the primary arr
         return key % 1000
     def hash2(self,key):
+        # to get indexes in the secondary arr
         return key // 1000
 
 
@@ -27,6 +29,7 @@ class MyHashSet(object):
         idx1 = self.hash1(key)
         idx2 = self.hash2(key)
         if self.storage[idx1] == None:
+            # handling edge case of including 0 in secondary  arr
             if idx1 == 0:
                 self.storage[idx1] = [False] * (self.secondary_arr + 1)
             else:
